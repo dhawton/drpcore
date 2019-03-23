@@ -24,7 +24,8 @@ server_scripts {
   "server/functions.lua",
   "server/user.lua",
   'server/main.lua',
-  'server/sync.lua'
+  'server/sync.lua',
+  'config.lua'
 }
 
 client_scripts {
