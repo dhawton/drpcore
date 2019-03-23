@@ -23,7 +23,8 @@ server_scripts {
   "server/common.lua",
   "server/functions.lua",
   "server/user.lua",
-  'server/main.lua'
+  'server/main.lua',
+  'server/sync.lua'
 }
 
 client_scripts {
@@ -33,7 +34,8 @@ client_scripts {
   'client/functions.lua',
   'client/main.lua',
   'client/wrapper.lua',
-  'shared/weapons.lua'
+  'client/sync.lua',
+  'shared/weapons.lua',
 }
 
 exports {
