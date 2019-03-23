@@ -1,0 +1,24 @@
+html,
+body {
+  margin: 0;
+}
+.vertical-center {
+  min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+dl,
+ol,
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  overflow-y: auto;
+  list-style-type: none;
+  padding: 0px;
+}
+
+.bg-red {
+  background-color: rgb(150, 0, 0);
+}

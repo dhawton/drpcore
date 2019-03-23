@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.0/css/all.css"
+      integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body style="background-color: rgba(0,20,40,1.0); color: #fff;">
+    <img
+      src="img/logo.png"
+      id="logo"
+      style="height: 200px;position:absolute;right:0;bottom:0;z-index:1;"
+    />
+    <img
+      src="img/drp.png"
+      id="drp"
+      style="height: 50px;position:absolute;left:0;bottom:0;z-index:1;"
+    />
+    <div class="vertical-center" id="container">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="card" style="width: 100%;">
+              <div
+                class="card-body"
+                style="background-color: rgba(0,20,40,0.75);"
+              >
+                <div id="loading" style="width:100%;margin:0;max-height:100%;">
+                  <center>
+                    <svg
+                      width="200"
+                      height="200"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 100 100"
+                      preserveAspectRatio="xMidYMid"
+                      class="lds-double-ring"
+                    >
+                      <circle
+                        cx="50"
+                        cy="50"
+                        fill="none"
+                        stroke-linecap="round"
+                        r="35"
+                        stroke-width="5"
+                        stroke="#0f4c11"
+                        stroke-dasharray="54.97787143782138 54.97787143782138"
+                        transform="rotate(102.738 50 50)"
+                      >
+                        <animateTransform
+                          attributeName="transform"
+                          type="rotate"
+                          calcMode="linear"
+                          values="0 50 50;360 50 50"
+                          keyTimes="0;1"
+                          dur="4.2s"
+                          begin="0s"
+                          repeatCount="indefinite"
+                        ></animateTransform>
+                      </circle>
+                      <circle
+                        cx="50"
+                        cy="50"
+                        fill="none"
+                        stroke-linecap="round"
+                        r="29"
+                        stroke-width="5"
+                        stroke="#59a8e5"
+                        stroke-dasharray="45.553093477052 45.553093477052"
+                        stroke-dashoffset="45.553093477052"
+                        transform="rotate(-102.738 50 50)"
+                      >
+                        <animateTransform
+                          attributeName="transform"
+                          type="rotate"
+                          calcMode="linear"
+                          values="0 50 50;-360 50 50"
+                          keyTimes="0;1"
+                          dur="4.2s"
+                          begin="0s"
+                          repeatCount="indefinite"
+                        ></animateTransform>
+                      </circle>
+                    </svg>
+                    <p>
+                      <span id="loadingMsg"
+                        >Waiting on response from server...</span
+                      >
+                    </p>
+                  </center>
+                </div>
+                <div
+                  id="characterSelect"
+                  style="display:none;width:100%;margin:0px;max-height:100%;"
+                >
+                  <h2>Welcome</h2>
+                  <p>Please select your character:</p>
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>ID Number</th>
+                        <th>Name</th>
+                        <th>Job</th>
+                        <th>Address</th>
+                        <th>License Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="characterbody"></tbody>
+                    <tfoot>
+                      <tr>
+                        <th colspan="6">
+                          <button
+                            class="btn btn-primary align-self-center btnCreateCharacter"
+                            type="button"
+                            style="width:50%;background-color:rgb(10,139,62);margin-left:25%;"
+                          >
+                            Create Character
+                          </button>
+                        </th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <div
+                  id="characterCreate"
+                  style="display:none;width:100%;margin:0px;max-height:100%;overflow:scroll-y;"
+                >
+                  <h2>Create Character</h2>
+                  <p>Fill out <u>all</u> items below:</p>
+                  <div
+                    class="form-row"
+                    style="margin-right:0px;margin-left:0px;padding-top:14px;"
+                  >
+                    <div class="col-md-8 offset-md-1">
+                      <p
+                        style="margin-left: 2%;font-family:Roboto, sans-serif;font-size:14px;"
+                      >
+                        <strong>First/Given Name:</strong>
+                      </p>
+                    </div>
+                    <div class="col-md-10 offset-md-1">
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="firstname"
+                        required=""
+                        placeholder="First Name"
+                        id="firstname"
+                        style="margin-left:0px;font-family:Roboto, sans-serif;"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="form-row"
+                    style="margin-right:0px;margin-left:0px;padding-top:24px;margin-top:-16px;"
+                  >
+                    <div class="col-md-8 offset-md-1">
+                      <p
+                        style="margin-left: 2%;font-family:Roboto, sans-serif;font-size:14px;"
+                      >
+                        <strong>Last/Family Name:</strong>
+                      </p>
+                    </div>
+                    <div class="col-md-10 offset-md-1">
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="lastname"
+                        required=""
+                        placeholder="Last Name"
+                        id="lastname"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="form-row"
+                    style="margin-right:0px;margin-left:0px;padding-top:24px;margin-top:-16px;"
+                  >
+                    <div class="col-md-8 offset-md-1">
+                      <p
+                        style="margin-left: 2%; font-family:Roboto, sans-serif; font-size:14px;"
+                      >
+                        <strong>Employment:</strong>
+                      </p>
+                    </div>
+                    <div class="col-md-10 offset-md-1">
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="editcreatedept"
+                          id="createdept"
+                          value="highway"
+                          disabled
+                        />
+                        <label class="form-check-label" for="createdept"
+                          >SASP</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="editcreatedept"
+                          id="createdept"
+                          value="sheriff"
+                          disabled
+                        />
+                        <label class="form-check-label" for="createdept"
+                          >BCSO</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="editcreatedept"
+                          id="createdept"
+                          value="police"
+                          disabled
+                        />
+                        <label class="form-check-label" for="createdept"
+                          >LSPD</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="editcreatedept"
+                          id="createdept"
+                          value="fire"
+                          disabled
+                        />
+                        <label class="form-check-label" for="createdept"
+                          >SAFD</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="editcreatedept"
+                          id="createdept"
+                          value="civ"
+                        />
+                        <label class="form-check-label" for="createdept"
+                          >Civ</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="form-row"
+                    style="margin-right:0px;margin-left:0px;padding-top:24px;margin-top:-16px;"
+                  >
+                    <div class="col-md-5 offset-md-1">
+                      <button
+                        class="btn btn-danger"
+                        style="width: 45%; float: left"
+                        onclick="loadSelect()"
+                        type="reset"
+                      >
+                        Go Back
+                      </button>
+                    </div>
+                    <div class="col-md-5">
+                      <button
+                        class="btn btn-success"
+                        style="background-color: clear; width: 100%"
+                        onclick="createCharacter()"
+                      >
+                        Create
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="characterEdit"
+                  style="display:none;width:100%;margin:0px;max-height:100%;overflow:scroll-y;"
+                >
+                  <input type="hidden" id="editid" value="0" />
+                  <h2>Edit Character</h2>
+                  <p>Fill out <u>all</u> items below:</p>
+                  <div
+                    class="form-row"
+                    style="margin-right:0px;margin-left:0px;padding-top:14px;"
+                  >
+                    <div class="col-md-8 offset-md-1">
+                      <p
+                        style="margin-left: 2%;font-family:Roboto, sans-serif;font-size:14px;"
+                      >
+                        <strong>First/Given Name:</strong>
+                      </p>
+                    </div>
+                    <div class="col-md-10 offset-md-1">
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="firstname"
+                        required=""
+                        placeholder="First Name"
+                        id="editfirstname"
+                        style="margin-left:0px;font-family:Roboto, sans-serif;"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="form-row"
+                    style="margin-right:0px;margin-left:0px;padding-top:24px;margin-top:-16px;"
+                  >
+                    <div class="col-md-8 offset-md-1">
+                      <p
+                        style="margin-left: 2%;font-family:Roboto, sans-serif;font-size:14px;"
+                      >
+                        <strong>Last/Family Name:</strong>
+                      </p>
+                    </div>
+                    <div class="col-md-10 offset-md-1">
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="lastname"
+                        required=""
+                        placeholder="Last Name"
+                        id="editlastname"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="form-row"
+                    style="margin-right:0px;margin-left:0px;padding-top:24px;margin-top:-16px;"
+                  >
+                    <div class="col-md-8 offset-md-1">
+                      <p
+                        style="margin-left: 2%; font-family:Roboto, sans-serif; font-size:14px;"
+                      >
+                        <strong>Department:</strong>
+                      </p>
+                    </div>
+                    <div class="col-md-10 offset-md-1">
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="editcreatedept"
+                          id="editcreatedept"
+                          value="highway"
+                          disabled
+                        />
+                        <label class="form-check-label" for="createdept"
+                          >SASP</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="editcreatedept"
+                          id="editcreatedept"
+                          value="sheriff"
+                          disabled
+                        />
+                        <label class="form-check-label" for="createdept"
+                          >BCSO</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="editcreatedept"
+                          id="editcreatedept"
+                          value="police"
+                          disabled
+                        />
+                        <label class="form-check-label" for="createdept"
+                          >LSPD</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="editcreatedept"
+                          id="editcreatedept"
+                          value="fire"
+                          disabled
+                        />
+                        <label class="form-check-label" for="createdept"
+                          >SAFD</label
+                        >
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="editcreatedept"
+                          id="editcreatedept"
+                          value="civ"
+                        />
+                        <label class="form-check-label" for="createdept"
+                          >Civ</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="form-row"
+                    style="margin-right:0px;margin-left:0px;padding-top:24px;margin-top:-16px;"
+                  >
+                    <div class="col-md-5 offset-md-1">
+                      <button
+                        class="btn btn-danger"
+                        style="width: 45%; float: left"
+                        onclick="loadSelect()"
+                        type="reset"
+                      >
+                        Go Back
+                      </button>
+                    </div>
+                    <div class="col-md-5">
+                      <button
+                        class="btn btn-success"
+                        style="background-color: clear; width: 100%"
+                        onclick="saveCharacter()"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="selectFireDept"
+                  style="display:none;width:100%;margin:0px;max-height:100%;"
+                >
+                  <h2>Select Station</h2>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('Fire1')"
+                        >
+                          Station 1 - Rockford Hills
+                        </button>
+                      </center>
+                    </div>
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('home')"
+                        >
+                          Home
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('Fire2')"
+                        >
+                          Station 2 - Davis
+                        </button>
+                      </center>
+                    </div>
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('lastposition')"
+                        >
+                          Last Position
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('Fire3')"
+                        >
+                          Station 3 - El Burro Heights
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('Fire4')"
+                        >
+                          Station 4 - Airport
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('Fire5')"
+                        >
+                          Station 5 - Fort Zancudo
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('Fire6')"
+                          disabled
+                        >
+                          Station 6 - Sandy Shores (Closed)
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('Fire7')"
+                        >
+                          Station 7 - Paleto Bay
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="selectLEODept"
+                  style="display:none;width:100%;margin:0px;max-height:100%;"
+                >
+                  <h2>Select Department</h2>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectDept('highway')"
+                        >
+                          San Andreas State Police
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectDept('sheriff')"
+                        >
+                          Blaine County Sheriff's Office
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectDept('police')"
+                        >
+                          Los Santos Police Department
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="selectStationLEO"
+                  style="display:none;width:100%;margin:0px;max-height:100%;"
+                >
+                  <h2>Select Spawn Location</h2>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('MissionRow')"
+                        >
+                          Mission Row
+                        </button>
+                      </center>
+                    </div>
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          onClick="selectStation('home')"
+                        >
+                          Home
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('Vespucci')"
+                        >
+                          Vespucci
+                        </button>
+                      </center>
+                    </div>
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          onClick="selectStation('lastposition')"
+                        >
+                          Last Location
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('Vinewood')"
+                        >
+                          Vinewood
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('BCSO')"
+                        >
+                          BCSO
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('SASP')"
+                        >
+                          SASP Office
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="selectStationCiv"
+                  style="display:none;width:100%;margin:0px;max-height:100%;"
+                >
+                  <h2>Select Spawn Location</h2>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          onClick="selectStation('home')"
+                        >
+                          Home
+                        </button>
+                      </center>
+                    </div>
+                    <div class="col-md-6">
+                      <center>
+                        <button
+                          class="btn btn-primary"
+                          style="margin-bottom: 15px;"
+                          onClick="selectStation('lastposition')"
+                        >
+                          Last Position
+                        </button>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="nui://game/ui/jquery.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
