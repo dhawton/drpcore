@@ -59,7 +59,7 @@ Citizen.CreateThread(function()
     Citizen.Wait(1000)
     local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(PlayerId())))
     local zone = GetNameOfZone(x, y, z)
-    if ativeWeather[zone] ~= currentWeather then
+    if activeWeather[zone] ~= currentWeather then
       ClearOverrideWeather()
       ClearWeatherTypePersist()
       SetWeatherTypeOverTime(wx, 25.0)

@@ -6,6 +6,8 @@ local hasSetupBank = false
 local oldpos = nil
 local isDead = false
 local Pickups = {}
+local hideRadar = false
+local hideAll = false
 
 Citizen.CreateThread(function()
   while DRP.Items == nil do
@@ -36,6 +38,13 @@ Citizen.CreateThread(function()
         NetworkSetFriendlyFireOption(true)
       end
     end
+
+    DisplayRadar(not hideRadar)
+    if hideAll then
+      HideHudAndRadarThisFrame()
+    end
+    
+    HideHudComponentThisFrame(7)
 	end
 end)
 
@@ -194,6 +203,7 @@ RegisterNUICallback(
       local h = 0.0
       local station = data.station
       local character = data.character
+      hideAll = true
       TriggerServerEvent("drp/identity:client/selectCharacter", character)
       if character.job_name ~= "highway" and character.job_name ~= "sheriff" and character.job_name ~= "police" and character.job_name ~= "fire" then
         TriggerServerEvent("drp/identity:client/spawnCiv", character.id, station)
@@ -277,14 +287,16 @@ RegisterNUICallback(
 
       Citizen.Wait(1000)
       SwitchInPlayer(GetPlayerPed(-1))
-      Citizen.Wait(3000)
+      Citizen.Wait(5000)
       TriggerServerEvent("drp/identity:spawned")
+      hideAll = false
     end)
   end
 )
 
 RegisterNetEvent("drp/teleportTransition")
 AddEventHandler("drp/teleportTransition", function(x,y,z,h)
+  hideAll = true
   SwitchOutPlayer(GetPlayerPed(-1), 0, 1)
   Citizen.Wait(3000)
   SetEntityCoords(GetPlayerPed(-1), x, y, z)
@@ -293,7 +305,8 @@ AddEventHandler("drp/teleportTransition", function(x,y,z,h)
   end
   Citizen.Wait(500)
   SwitchInPlayer(GetPlayerPed(-1))
-  Citizen.Wait(3000)
+  Citizen.Wait(5000)
+  hideAll = false
 end)
 
 RegisterNetEvent("drp/teleport")
