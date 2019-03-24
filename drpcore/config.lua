@@ -20,10 +20,10 @@ Config.Weather.Time = 15 * 60 * 1000 -- 15 minutes
 Config.Weather.Systems = {
   {
     {
-      "TERMINA", "ELYSIAN", "AIRP", "BANNING", "DELSOL", "RANCHO", "STRAW", "CYPRE", "SANAND",
+      "TERMINA", "ELYSIAN", "AIRP", "BANNING", "DELSOL", "RANCHO", "STRAW", "CYPRE", "SANAND", "VINE",
       "MURRI", "LMESA", "SKID", "LEGSQU", "TEXTI", "PBOX", "KOREAT",
       "MIRR", "EAST_V", "DTVINE", "ALTA", "HAWICK", "BURTON", "ROCKF", "MOVIE", "DELPE", "MORN", "RICHM", "GOLF", "WVINE", "DTVINE", "HORS", "LACT", "LDAM",
-      "CHIL", "GREATC", "RGLEN", "TONGVAV", "",
+      "CHIL", "GREATC", "RGLEN", "TONGVAV", "DAVIS", "EBURO", "LOSPUER", "STAD", "ZP_ORT", "VINE", "DOWNT"
     },
     { Config.Weather.Types[10] },
     {
@@ -63,7 +63,7 @@ Config.Weather.Systems = {
   },
   {
     {
-      "PALMPOW", "WINDF", "JAIL", "DESRT", "SANDY", "ZQ_UAR", "HUMLAB", "SANCHIA", "GRAPES", "ALAMO", "SLAB", "CALAFAB",
+      "PALMPOW", "WINDF", "JAIL", "DESRT", "SANDY", "ZQ_UAR", "HUMLAB", "SANCHIA", "GRAPES", "ALAMO", "SLAB", "CALAFAB", "NOOSE"
     },
     {
       Config.Weather.Types[1], Config.Weather.Types[2], Config.Weather.Types[6], Config.Weather.Types[7]
@@ -79,7 +79,7 @@ Config.Weather.Systems = {
     },
   },
   {
-    { "LAGO", "ARMYB", "NCHU", "CANNY", "MTJOSE", "HARMO", "RTRACK" },
+    { "LAGO", "ARMYB", "NCHU", "CANNY", "MTJOSE", "HARMO", "RTRACK", "ZANCUDO", "CCREAK", "CHAMH", "CANNY", "TATAMO", "ZANCUDO", "PALHIGH" },
     {
       Config.Weather.Types[9],Config.Weather.Types[8],Config.Weather.Types[1],Config.Weather.Types[3],Config.Weather.Types[4],Config.Weather.Types[5],Config.Weather.Types[11]
     },

@@ -4,6 +4,7 @@ local freezeTime = false
 local lockDayTime = false
 local activeWeather = {}
 local lastZone = 0
+local currentWeather = "none"
 
 RegisterNetEvent('drp/sync:time')
 AddEventHandler('drp/sync:time', function(cHr, cMin, freeze)
@@ -11,7 +12,7 @@ AddEventHandler('drp/sync:time', function(cHr, cMin, freeze)
     currentMinutes = cMin
 end)
 
-Citizen.CreateThead(function()
+Citizen.CreateThread(function()
   while true do
     if lockDayTime then
       Citizen.Wait(0)
@@ -58,17 +59,17 @@ Citizen.CreateThread(function()
     Citizen.Wait(1000)
     local x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(PlayerId())))
     local zone = GetNameOfZone(x, y, z)
-    for i, weatherZone in ipairs(activeWeather) do
-      if weatherZone[1] == zone and lastZone ~= zone then
-        Citizen.Wait(5000)
+    for i, wx in pairs(activeWeather) do
+      if (i == zone and lastZone ~= zone) or (i == zone and currentWeather ~= wx) then
         ClearOverrideWeather()
         ClearWeatherTypePersist()
-        SetWeatherTypeOverTime(weatherZone[2], 15.0)
-        Citizen.Wait(15000)
-        SetWeatherTypePersist(weatherZone[2])
-        SetWeatherTypeNow(weatherZone[2])
-        SetWeatherTypeNowPersist(weatherZone[2])
+        SetWeatherTypeOverTime(wx, 25.0)
+        Citizen.Wait(25000)
+        SetWeatherTypePersist(wx)
+        SetWeatherTypeNow(wx)
+        SetWeatherTypeNowPersist(wx)
         lastZone = zone
+        currentWeather = wx
       end
     end
   end

@@ -6,6 +6,14 @@ local currentHours = 0
 local timeSyncCooldown = 0
 local activeWeatherSystems = {}
 
+
+print("Math random is seeded.")
+
+RegisterCommand("randomizeweather", function()
+  randomizeSystems()
+  TriggerClientEvent("drp/sync:weather", -1, activeWeatherSystems)
+end)
+
 RegisterServerEvent('drp/sync:request')
 AddEventHandler('drp/sync:request', function()
   TriggerClientEvent("drp/sync:weather", source, activeWeatherSystems)
@@ -35,8 +43,6 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
     randomizeSystems()
-    print("New weather systems:")
-    print(json.encode(activeWeatherSystems))
     TriggerClientEvent("drp/sync:weather", -1, activeWeatherSystems)
     Citizen.Wait(Config.Weather.Time)
   end
@@ -56,9 +62,14 @@ function randomizeSystems()
   for i, weatherSystem in ipairs(Config.Weather.Systems) do
     local currentSeason = getCurrentSeason()
     local availableWeathers = weatherSystem[currentSeason + 1]
-    local pickedWeather = availableWeathers[math.random(1, #availableWeathers)]
+    math.randomseed(os.time())
+    math.random()
+    math.random()
+    math.random()
+    local r = math.random(1, #availableWeathers)
+    local pickedWeather = availableWeathers[r]
     for _, weatherZone in ipairs(weatherSystem[1]) do
-      table.insert(activeWeatherSystems, {weatherZone, pickedWeather})
+      activeWeatherSystems[weatherZone] = pickedWeather
     end
   end
 end
